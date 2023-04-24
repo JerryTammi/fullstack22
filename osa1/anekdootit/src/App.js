@@ -26,13 +26,14 @@ const App = () => {
     copy[selected] += 1
     setVotes(copy)
 
-    var max = votes[0]
-    var maxIndex = 0
+    let max = best
+    console.log(max)
+    let maxIndex = 0
 
-    for(var i = 1; i < votes.length; i++) {
-      console.log('max' + max)
+    for(let i = 0; i < votes.length; i++) {
       console.log(votes[i])
       if (votes[i] > max) {
+        console.log(votes[i])
         max = votes[i]
         maxIndex = i
       }
