@@ -1,6 +1,6 @@
-const Course = (props) => {
-    const name = props.course.name
-    const parts = props.course.parts
+const Course = ({course}) => {
+    const name = course.name
+    const parts = course.parts
     return (
       <div>
         <Header name = {name}/>
@@ -9,15 +9,13 @@ const Course = (props) => {
     )
   }
   
-  const Header = (props) => {
+  const Header = ({name}) => {
     return (
-        <h2>{props.name}</h2>
+        <h2>{name}</h2>
     )
   }
   
-  const Content = (props) => {
-    const parts = props.parts
-  
+  const Content = ({parts}) => {
     const total = parts.reduce((s, p) => {
       return s + p.exercises
     }, 0)
@@ -32,9 +30,9 @@ const Course = (props) => {
     )
   }
   
-  const Part = (props) => {
+  const Part = ({part}) => {
     return (
-        <p>{props.part.name} {props.part.exercises}</p>
+        <p>{part.name} {part.exercises}</p>
     )
   }
 
