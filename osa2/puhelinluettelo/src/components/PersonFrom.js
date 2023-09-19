@@ -1,3 +1,5 @@
+import personService from '../services/personServices'
+
 const PersonForm = ({persons, newName, newNumber, setPersons, setFilteredPersons, setNewName, setNewNumber}) => {
     const addName = (event) => {
         event.preventDefault()
@@ -15,10 +17,14 @@ const PersonForm = ({persons, newName, newNumber, setPersons, setFilteredPersons
           )
     
         if (!contains) {
-          setPersons(persons.concat(phonebookObject))
-          setFilteredPersons(persons.concat(phonebookObject))
-          setNewName('')
-          setNewNumber('')
+          personService
+            .create(phonebookObject)
+            .then(response => {
+              setPersons(persons.concat(phonebookObject))
+              setFilteredPersons(persons.concat(phonebookObject))
+              setNewName('')
+              setNewNumber('')
+            })
         }
       }
     

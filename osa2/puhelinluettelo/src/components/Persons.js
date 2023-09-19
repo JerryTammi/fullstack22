@@ -3,7 +3,7 @@ const Persons = ({persons}) => {
       <div>
         <ul>
         {persons.map(person =>
-        <li key={person.name}>{person.name} {person.number}</li>
+        <li key={person.id}>{person.name} {person.number} <button type="submit">Delete</button></li>
         )}
         </ul>
       </div>
