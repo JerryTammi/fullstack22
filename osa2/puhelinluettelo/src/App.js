@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react'
 import Persons from './components/Persons'
 import Filter from './components/Filter'
-import PersonForm from './components/PersonFrom'
-import personService from './services/personServices'
+import PersonForm from './components/PersonForm'
+import personService from './services/personService'
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filteredPersons, setFilteredPersons] = useState(persons)
+  const [successMessage, setSuccessMessage] = useState('Person added succesfully!')
 
   useEffect(() => {
       personService
@@ -39,7 +40,7 @@ const App = () => {
 
       <h2>Numbers</h2>
 
-      <Persons persons={filteredPersons}/>
+      <Persons persons={filteredPersons} setFilteredPersons={setFilteredPersons} setPersons = {setPersons}/>
     </div>
   )
 

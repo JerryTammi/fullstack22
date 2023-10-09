@@ -1,4 +1,4 @@
-import personService from '../services/personServices'
+import personService from '../services/personService'
 
 const PersonForm = ({persons, newName, newNumber, setPersons, setFilteredPersons, setNewName, setNewNumber}) => {
     const addName = (event) => {
@@ -8,9 +8,19 @@ const PersonForm = ({persons, newName, newNumber, setPersons, setFilteredPersons
           number: newNumber
         }
         let contains = false
-        persons.map(person =>
-            {if (person.name === newName) {
-              window.alert(`${newName} is already added to phonebook`)
+        persons.map(person => {
+            if (person.name === newName) {
+              if (window.confirm(`${newName} is already added to phonebook. Update with new number?`)) {
+                phonebookObject['id'] = person.id
+                console.log(phonebookObject)
+                personService.updatePerson(phonebookObject)
+                personService.getAll()
+                  .then(response => {
+                    setPersons(response.data)
+                    setFilteredPersons(response.data)
+                  })
+                  .catch(error => console.log(error))
+              }
               contains = true
             }}
     
