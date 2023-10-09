@@ -2,14 +2,13 @@ import personService from '../services/personService'
 
 const Persons = ({persons, setPersons, setFilteredPersons}) => {
 
-  const handleClick = (personId) => {
+  const handleClick = (person) => {
     if (window.confirm("Confirm delete!")) {
-      personService.deletePerson(personId)
+      personService.deletePerson(person)
       personService
         .getAll()
         .then(response => {
           setPersons(response.data)
-          setFilteredPersons(response.data)
         })
     }
   }
@@ -21,7 +20,7 @@ const Persons = ({persons, setPersons, setFilteredPersons}) => {
       <li key={person.id}>
         {person.name} {person.number}
         <button type="submit" onClick={() => {
-          handleClick(person.id)
+          handleClick(person)
         }}>
         Delete</button>
       </li>
