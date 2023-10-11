@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import personService from '../services/personService'
 
-const PersonForm = ({persons, setPersons}) => {
+const PersonForm = ({persons, setPersons, setSuccessMessage}) => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const addName = (event) => {
@@ -21,6 +21,10 @@ const PersonForm = ({persons, setPersons}) => {
                   setPersons(response.data)
                 })
                 .catch(error => console.log(error))
+                setSuccessMessage(`${newName}'s number updated!`)
+                setTimeout(() => {
+                  setSuccessMessage(null)
+                }, 2000)
             }
             contains = true
           }}
@@ -39,6 +43,10 @@ const PersonForm = ({persons, setPersons}) => {
           .then(response => {
             setPersons(response.data)
           })
+        setSuccessMessage(`Added ${newName}`)
+              setTimeout(() => {
+                setSuccessMessage(null)
+              }, 2000)
       }
     }
   

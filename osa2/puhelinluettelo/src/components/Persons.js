@@ -1,10 +1,16 @@
 import personService from '../services/personService'
 
-const Persons = ({persons, setPersons, setFilteredPersons}) => {
+const Persons = ({persons, setPersons, setErrorMessage }) => {
 
   const handleClick = (person) => {
     if (window.confirm("Confirm delete!")) {
       personService.deletePerson(person)
+      .catch(error => {
+        setErrorMessage(`Information of ${person.name} has already been removed from the server!`)
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 2000)
+      }) 
       personService
         .getAll()
         .then(response => {
