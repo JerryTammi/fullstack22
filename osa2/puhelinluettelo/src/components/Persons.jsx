@@ -1,5 +1,3 @@
-import personService from '../services/personService'
-
 const Persons = ({personsToShow, deletePerson}) => {
   return (
     <div>

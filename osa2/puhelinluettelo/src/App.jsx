@@ -94,7 +94,7 @@ const App = () => {
       personService.getAll()
         .then(response => response.data)
         .then(() => {
-          setPersons(persons.filter(p => p.id != person.id))
+          setPersons(persons.filter(p => p.id !== person.id))
           setNotification(`Information of ${person.name} was removed from the server!`)
           hideNotif()
         })
