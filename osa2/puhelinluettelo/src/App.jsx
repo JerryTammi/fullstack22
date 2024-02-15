@@ -52,12 +52,17 @@ const App = () => {
       name: newName,
       number: newNumber
     }
-    if (!newName || !newNumber) {
-      setError('A name and number is required!')
-      hideNotif()
-      return
-    }
-
+    //if (newName.length < 3) {
+    //  setError('The length of the name must be at least 3!')
+    //  hideNotif()
+    //  return
+    //}
+    //if (!newNumber) {
+    //  setError('A valid number is required!')
+    //  hideNotif()
+    //  return
+    //}
+    let error = false
     let contains = false
     const personExists = persons.find(p => p.name.toLowerCase() === newName.toLowerCase())
 
@@ -65,22 +70,37 @@ const App = () => {
       const updatedPerson = {...personExists, number: newNumber}
       contains = true
       personService.updatePerson(updatedPerson)
-      setPersons(persons.map(person => person.id !== updatedPerson.id ? person : updatedPerson))
-      setNotification(`${newPerson.name} number was updated!`)
-      hideNotif()
-    }
+        .then(response => {
+          setPersons(persons.map(person => person.id !== updatedPerson.id ? person : updatedPerson))
+          setNewName('')
+          setNewNumber('')
+          setNotification(`${newPerson.name} number was updated!`)
+          hideNotif()
+        })
+        .catch(error => {
+          console.log(error.response.data)
+          setError(error.response.data.error)
+          hideNotif()
+        })
+    } 
 
     if (!contains) {
-      personService.create(newPerson)
+      personService
+        .create(newPerson)
         .then(response => response.data)
         .then(createdPerson => {
           setPersons(persons.concat(createdPerson))
+          setNewName('')
+          setNewNumber('')
+          setNotification(`${newPerson.name} was added to the phonebook!`)
+          hideNotif()
         })
-      setNotification(`${newPerson.name} was added to the phonebook!`)
-      hideNotif()
+        .catch(error => {
+          console.log(error.response.data)
+          setError(error.response.data.error)
+          hideNotif()
+        })
     }
-    setNewName('')
-    setNewNumber('')
   }
 
   const deletePerson = (person) => {
