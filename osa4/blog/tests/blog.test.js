@@ -120,7 +120,7 @@ describe('most blogs', () => {
   test('of empty list is nan', () => {
     const blogs = []
     const result = listHelper.mostBlogs(blogs)
-    assert.deepEqual(result, {})
+    assert.deepStrictEqual(result, {})
   })
 
   test('when list has only one blog equals that', () => {
@@ -139,7 +139,7 @@ describe('most blogs', () => {
         author: "Michael Chan",
         blogs: 1
     }
-    assert.deepEqual(result, author)
+    assert.deepStrictEqual(result, author)
   })
 
   test('of a bigger list is calculated right', () => {
@@ -148,7 +148,7 @@ describe('most blogs', () => {
       author: "Robert C. Martin",
       blogs: 3
   }
-    assert.deepEqual(result, author)
+    assert.deepStrictEqual(result, author)
   })
 })
 
@@ -156,7 +156,7 @@ describe('most likes', () => {
   test('of empty list is nan', () => {
     const blogs = []
     const result = listHelper.mostLikes(blogs)
-    assert.deepEqual(result, {})
+    assert.deepStrictEqual(result, {})
   })
 
   test('when list has only one blog equals that', () => {
@@ -175,7 +175,7 @@ describe('most likes', () => {
         author: "Michael Chan",
         likes: 7
     }
-    assert.deepEqual(result, author)
+    assert.deepStrictEqual(result, author)
   })
 
   test('of a bigger list is calculated right', () => {
@@ -184,6 +184,6 @@ describe('most likes', () => {
       author: "Edsger W. Dijkstra",
       likes: 17
     }
-    assert.deepEqual(result, author)
+    assert.deepStrictEqual(result, author)
   })
 })
